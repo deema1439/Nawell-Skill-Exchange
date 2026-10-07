@@ -78,20 +78,20 @@ Java 17, Spring Boot, Spring MVC, Spring Data JPA/Hibernate, MySQL, Jakarta Vali
 
 ```text
 Capstone_3/
-â”œâ”€â”€ pom.xml
-â”œâ”€â”€ mvnw / mvnw.cmd
-â””â”€â”€ src/main/
-    â”œâ”€â”€ java/com/example/capstone_3/
-    â”‚   â”œâ”€â”€ Controller/   HTTP routes
-    â”‚   â”œâ”€â”€ Service/      Business logic and integration helpers
-    â”‚   â”œâ”€â”€ Repository/   Database access interfaces
-    â”‚   â”œâ”€â”€ Model/        JPA entities
-    â”‚   â”œâ”€â”€ DtoIn/        Request data
-    â”‚   â”œâ”€â”€ DtoOut/       Response data
-    â”‚   â”œâ”€â”€ Config/       Application configuration
-    â”‚   â”œâ”€â”€ Advice/       Exception handling
-    â”‚   â””â”€â”€ Api/          Response and exception types
-    â””â”€â”€ resources/application.properties
+├── pom.xml
+├── mvnw / mvnw.cmd
+└── src/main/
+    ├── java/com/example/capstone_3/
+    │   ├── Controller/   HTTP routes
+    │   ├── Service/      Business logic and integration helpers
+    │   ├── Repository/   Database access interfaces
+    │   ├── Model/        JPA entities
+    │   ├── DtoIn/        Request data
+    │   ├── DtoOut/       Response data
+    │   ├── Config/       Application configuration
+    │   ├── Advice/       Exception handling
+    │   └── Api/          Response and exception types
+    └── resources/application.properties
 ```
 
 ## Database entities
