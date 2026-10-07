@@ -69,9 +69,6 @@ public class SkillAssessmentService {
         }
     }
 
-//ما ينفع احط ابديت هنا مو منطقي الا في حال وجود الادمن
-
-//حتى الحذف الا لو فيه ادمن
 
 
     //endpoint 11 done
