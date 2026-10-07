@@ -55,7 +55,7 @@ public class AIService {
     private final ExchangeRepository exchangeRepository;
 
 
-    @Value("${}")
+    @Value("${apify.api.token:}")
     private String apifyApiToken;
 
 
