@@ -52,21 +52,72 @@ public class BrevoEmailService {
         }
     }
 
-    //  ارسال ايميل عام (نعطيه العنوان والنص) لاشعارات التوكنز
+    // ارسال ايميل عام (نعطيه العنوان والنص) لاشعارات التوكنز
     public void sendEmail(String recipientEmail, String subject, String text) {
         if (apiKey.isBlank() || senderEmail.isBlank()) {
             throw new ApiException("Email service is not configured");
         }
+
         Map<String, Object> body = Map.of(
-                "sender", Map.of("name", senderName, "email", senderEmail),
-                "to", List.of(Map.of("email", recipientEmail)),
+                "sender", Map.of(
+                        "name", senderName,
+                        "email", senderEmail
+                ),
+                "to", List.of(
+                        Map.of("email", recipientEmail)
+                ),
                 "subject", subject,
                 "textContent", text
         );
+
         try {
-            restClient.post().uri("/smtp/email").header("api-key", apiKey).contentType(MediaType.APPLICATION_JSON).body(body).retrieve().toBodilessEntity();
+            restClient.post()
+                    .uri("/smtp/email")
+                    .header("api-key", apiKey)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(body)
+                    .retrieve()
+                    .toBodilessEntity();
+
         } catch (RestClientException exception) {
             throw new ApiException("Could not send email");
+        }
+    }
+
+    public void sendSessionEmail(
+            String recipientEmail,
+            String subject,
+            String message) {
+
+        if (apiKey.isBlank() || senderEmail.isBlank()) {
+            throw new ApiException("Email service is not configured");
+        }
+
+        Map<String, Object> body = Map.of(
+                "sender", Map.of(
+                        "name", senderName,
+                        "email", senderEmail
+                ),
+                "to", List.of(
+                        Map.of("email", recipientEmail)
+                ),
+                "subject", subject,
+                "textContent", message
+        );
+
+        try {
+            restClient.post()
+                    .uri("/smtp/email")
+                    .header("api-key", apiKey)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(body)
+                    .retrieve()
+                    .toBodilessEntity();
+
+        } catch (RestClientException exception) {
+            throw new ApiException(
+                    "Could not send email. Please try again later"
+            );
         }
     }
 }

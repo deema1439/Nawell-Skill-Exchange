@@ -1,7 +1,9 @@
 package com.example.capstone_3.Controller;
 
 import com.example.capstone_3.Api.ApiResponse;
+import com.example.capstone_3.DtoIn.OfferEvaluationDtoIn;
 import com.example.capstone_3.Model.SkillOffer;
+import com.example.capstone_3.Service.AIService;
 import com.example.capstone_3.Service.SkillOfferService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class SkillOfferController {
 
     private final SkillOfferService skillOfferService;
+    private final AIService aiService;
 
     @GetMapping("/get")
     public ResponseEntity<?> getSkillOffer() {
@@ -51,8 +54,14 @@ public class SkillOfferController {
     public ResponseEntity<?> getOffersCreatedByProvider(@PathVariable Integer providerId) {
         return ResponseEntity.status(200).body(skillOfferService.getOffersCreatedByProvider(providerId));
     }
+
     @GetMapping("/available")
     public ResponseEntity<?> getActiveOffers() {
         return ResponseEntity.status(200).body(skillOfferService.getActiveOffers());
+    }
+
+    @PostMapping("/create/{skillId}/evaluate")
+    public ResponseEntity<?> evaluateOffer(HttpSession session, @PathVariable Integer skillId, @RequestBody @Valid OfferEvaluationDtoIn dto) {
+        return ResponseEntity.status(200).body(aiService.evaluateOffer((Integer) session.getAttribute("accountId"), skillId, dto));
     }
 }

@@ -1,6 +1,7 @@
 package com.example.capstone_3.Controller;
 
 import com.example.capstone_3.Api.ApiResponse;
+import com.example.capstone_3.DtoIn.CreateSessionDtoIn;
 import com.example.capstone_3.DtoIn.SessionDtoIn;
 import com.example.capstone_3.Service.SessionService;
 import jakarta.servlet.http.HttpSession;
@@ -41,10 +42,10 @@ public class SessionController {
         return ResponseEntity.status(200).body(new ApiResponse("session deleted"));
     }
 
+
     @PostMapping("/create/{offerId}")
-    public ResponseEntity<?> createSession(@PathVariable Integer offerId, @RequestBody @Valid SessionDtoIn sessionDtoIn, HttpSession session) {
-        sessionService.createSession((Integer) session.getAttribute("accountId"), offerId, sessionDtoIn);
-        return ResponseEntity.status(200).body(new ApiResponse("session created"));
+    public ResponseEntity<?> createSession(@PathVariable Integer offerId, @RequestBody @Valid CreateSessionDtoIn createSessionDtoIn, HttpSession session) {
+        return ResponseEntity.status(201).body(sessionService.createSession((Integer) session.getAttribute("accountId"), offerId, createSessionDtoIn));
     }
 
     @PostMapping("/{sessionId}/join/{exchangeId}")
@@ -63,6 +64,8 @@ public class SessionController {
     public ResponseEntity<?> getSessionsByOffer(@PathVariable Integer offerId) {
         return ResponseEntity.status(200).body(sessionService.getSessionsByOffer(offerId));
     }
+
+
 
     @GetMapping("/exchange/{exchangeId}")
     public ResponseEntity<?> getSessionsByExchange(@PathVariable Integer exchangeId, HttpSession session) {

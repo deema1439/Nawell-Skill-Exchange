@@ -59,6 +59,9 @@ public class Session {
     @Column(columnDefinition = "VARCHAR(20) not null DEFAULT 'SCHEDULED'")
     private String status = "SCHEDULED";
 
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean reminderSent = false;
+
     @NotNull(message = "The skill offer can't be null")
     @ManyToOne
     @JoinColumn(name = "skill_offer_id", nullable = false)

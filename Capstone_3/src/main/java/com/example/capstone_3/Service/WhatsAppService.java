@@ -36,7 +36,8 @@ public class WhatsAppService {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
 
         try {
-            restTemplate.postForObject(url, request, String.class);
+            String response = restTemplate.postForObject(url, request, String.class);
+            System.out.println("UltraMsg response: " + response);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send WhatsApp message: " + e.getMessage());
         }

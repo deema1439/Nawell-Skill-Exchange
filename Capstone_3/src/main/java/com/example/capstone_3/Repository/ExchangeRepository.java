@@ -21,6 +21,8 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer> {
 
     long countBySkillOffer_IdAndStatusIn(Integer offerId, List<String> statuses);
 
+    List<Exchange> findBySkillOffer_IdAndStatusIn(Integer offerId, List<String> statuses);
+
     @Query("SELECT e FROM Exchange e WHERE e.learningRequest.requesterAccount.id = :accountId OR e.learningRequest.providerAccount.id = :accountId ORDER BY e.createdAt DESC, e.id DESC")
     List<Exchange> findExchangesRelatedToAccount(@Param("accountId") Integer accountId);
 

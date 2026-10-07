@@ -180,4 +180,48 @@ public class ZoomService {
             throw new ApiException("Unable to read the Zoom response. Check Zoom before retrying");
         }
     }
+
+    public void deleteMeeting(Long meetingId) {
+
+        if (meetingId == null || meetingId <= 0) {
+            throw new ApiException("Invalid Zoom meeting ID");
+        }
+
+        String accessToken = getAccessToken();
+
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.zoom.us/v2/meetings/" + meetingId))
+                    .timeout(Duration.ofSeconds(30))
+                    .header("Authorization", "Bearer " + accessToken)
+                    .DELETE()
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(
+                    request,
+                    HttpResponse.BodyHandlers.ofString()
+            );
+
+            if (response.statusCode() == 204 || response.statusCode() == 404) {
+                return;
+            }
+
+            throw new ApiException(
+                    "Could not delete Zoom meeting " + meetingId
+                            + ". Status: " + response.statusCode()
+                            + ". Check Zoom before retrying"
+            );
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new ApiException(
+                    "Zoom deletion was interrupted. Check meeting " + meetingId
+            );
+
+        } catch (IOException e) {
+            throw new ApiException(
+                    "Could not confirm Zoom deletion. Check meeting " + meetingId
+            );
+        }
+    }
 }
