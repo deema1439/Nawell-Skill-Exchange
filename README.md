@@ -1,4 +1,6 @@
 [NAWELL_README_Deema.md](https://github.com/user-attachments/files/33176923/NAWELL_README_Deema.md)
+[Nawell · ناول.pdf](https://github.com/user-attachments/files/33184511/Nawell.pdf)
+
 # NAWELL | ناول
 
 NAWELL | ناول is a skill-exchange platform that helps individuals and companies learn without relying only on paid lessons. Users earn tokens by teaching and spend them on learning. Skill verification, AI matching, date negotiation, sessions, and reviews help users find suitable providers and organize their exchanges.
